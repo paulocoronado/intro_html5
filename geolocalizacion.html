@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocalización HTML5 con OpenStreetMap</title>
+    <meta charset="utf-8" />
+    <style>
+      /* Estilo del mapa */
+      #map {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Geolocalización HTML5 con OpenStreetMap</h1>
+    <p>Presione el botón para obtener su ubicación:</p>
+    <button onclick="getLocation()">Obtener Ubicación</button>
+    <div id="map"></div>
+
+    <!-- Librerías de OpenLayers -->
+    
+    
+    
+    <script>
+      function getLocation() {
+        if (navigator.geolocation) {
+          // Se soporta la geolocalización
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+          // No se soporta la geolocalización
+          alert("Geolocalización no soportada en su navegador");
+        }
+      }
+
+      function showPosition(position) {
+        // Se obtuvo la ubicación
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+
+        // Crear mapa
+        var map = new ol.Map({
+          target: "map",
+          layers: [
+            new ol.layer.Tile({
+              source: new ol.source.OSM(),
+            }),
+          ],
+          view: new ol.View({
+            center: ol.proj.fromLonLat([lng, lat]),
+            zoom: 15,
+          }),
+        });
+
+        // Crear marcador en la ubicación del usuario
+        var marker = new ol.Feature({
+          geometry: new ol.geom.Point(ol.proj.fromLonLat([lng, lat])),
+        });
+
+        var vectorSource = new ol.source.Vector({
+          features: [marker],
+        });
+
+        var markerVectorLayer = new ol.layer.Vector({
+          source: vectorSource,
+        });
+
+        map.addLayer(markerVectorLayer);
+      }
+
+      function showError(error) {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            alert("Permiso para geolocalización denegado");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            alert("No se pudo obtener la ubicación");
+            break;
+          case error.TIMEOUT:
+            alert("Tiempo de espera agotado");
+            break;
+          case error.UNKNOWN_ERROR:
+            alert("Error desconocido");
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>

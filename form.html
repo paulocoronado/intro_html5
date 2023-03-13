@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Formulario</title>
+</head>
+<body>
+	<form method="get" action="procesar.html">
+		<fieldset>
+			<legend>Información Personal</legend>
+			
+            <label for="fname">Nombre:</label>
+			<input type="text" id="fname" name="fname" size="5" placeholder="Ingrese nombre"><br><br>
+            <!-- value="Nombre" required disabled  form="x" maxlength=5 readonly size="10" tabindex="x"-->
+            <!-- pattern="[A-Za-z]{3}" title="Three letter country code"-->
+            <!-- https://regexlearn.com/ -->
+			
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" required><br><br>
+            <!-- multiple -->
+			
+			<label for="phone">Número telefónico:</label>
+			<input type="tel" id="phone" name="phone"><br><br>
+            <!-- pattern maxlength-->
+			
+			<label for="dob">Fecha de Nacimiento:</label>
+			<input type="date" id="dob" name="dob"><br><br>
+
+            
+			<label for="edad">Rango edad:</label>
+			<input type="radio" id="young" name="age" value="young">
+			<label for="young">0-25</label>
+			<input type="radio" id="adult" name="age" value="adult">
+			<label for="adult">26-55</label>
+			<input type="radio" id="senior" name="age" value="senior">
+			<label for="senior">Más de 56</label><br><br>
+			
+			<label for="country">País:</label>
+			<select id="country" name="country">
+                <option value="co">Colombia</option>
+				<option value="br">Brasil</option>
+				<option value="ca">Canada</option>
+				<option value="mx">Mexico</option>
+				<option value="otro">Otro</option>
+			</select><br><br>
+			
+			<label for="bio">Bio:</label>
+			<textarea id="bio" name="bio"></textarea><br><br>
+
+            <!--Insertar un checkbox-->
+            <label for="terms">Acepto términos y condiciones:</label>
+            <input type="checkbox" id="terms" name="terms" required><br><br>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Credenciales de acceso</legend>
+			<label for="username">Nombre de Usuario:</label>
+			<input type="text" id="username" name="username" required><br><br>
+			
+			<label for="password">Clave:</label>
+			<input type="password" id="password" name="password" required><br><br>
+			
+			<label for="confirm_password">Confirmar clave:</label>
+			<input type="password" id="confirm_password" name="confirm_password" required><br><br>
+			
+			<label for="avatar">Avatar:</label>
+			<input type="file" id="avatar" name="avatar"><br><br>
+		</fieldset>
+		
+		<input type="hidden" name="hidden_field" value="This is a hidden field.">
+		
+		<button type="button" onclick="alert('Button clicked!')">Button</button>
+		<button type="submit">Submit</button>
+		<button type="reset">Reset</button>
+	</form>
+</body>
+</html>
